@@ -28,7 +28,7 @@ namespace Microsoft.Devices.Radio
 		private FMRadio()
 		{
 			uint playing;
-			CurrentRegion = RadioRegion.UnitedStates;
+			CurrentRegion = RadioRegion.Europe;
 			RadioApiNativeMethods.MediaApi_GetRadioPlaying(out playing);
 			powerMode = (playing == 0 ? RadioPowerMode.Off : RadioPowerMode.On);
 		}
