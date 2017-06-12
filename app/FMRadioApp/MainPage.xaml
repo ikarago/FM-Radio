@@ -377,7 +377,109 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel Padding="24">
+        <!-- TEMP PLACE -->
+        <ToggleSwitch IsOn="{Binding RadioOn, Mode=TwoWay}"
+                      IsEnabled="{Binding RadioSupported}" 
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Style="{StaticResource OnOffSwitchStyle}" />
+        
+        
+        
+        <StackPanel VerticalAlignment="Center"
+                    Canvas.ZIndex="10">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="24,0">
+                <TextBlock Text="{Binding Frequency, Mode=TwoWay, Converter={StaticResource FrequencyFormatter}, FallbackValue='Radio'}"
+                           Style="{ThemeResource HeaderTextBlockStyle}"                           
+                           FontSize="96"
+                           FontWeight="Normal"
+                           Margin="0,0,0,0"/>
+                <TextBlock x:Name="tblMhz"
+                           Text="MHz"
+                           Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                           Style="{ThemeResource SubheaderTextBlockStyle}"
+                           Margin="0,24,0,0"/>
+            </StackPanel>
+
+            <Grid Margin="0,-48,0,0"
+                  Canvas.ZIndex="5">
+                <ScrollViewer HorizontalScrollMode="Enabled"
+                              VerticalScrollMode="Disabled" 
+                              HorizontalScrollBarVisibility="Hidden"
+                              VerticalScrollBarVisibility="Disabled" 
+                              Height="120"
+                              Background="Transparent"
+                              BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}"
+                              BorderThickness="0,0,0,0"
+                              Padding="0"
+                              Margin="0" 
+                              Foreground="{ThemeResource ApplicationForegroundThemeBrush}" 
+                              x:Name="scrollview" 
+                              ViewChanged="OnScrollerScrolled"
+                              LayoutUpdated="OnScrollviewLayout">
+                    <Canvas x:Name="scrollerCanvas"
+                            Canvas.ZIndex="1"
+                            Width="240"
+                            Height="4"
+                            Background="{ThemeResource ApplicationForegroundThemeBrush}" 
+                            Loaded="OnScrollerLoaded" />
+                </ScrollViewer>
+                <Ellipse Fill="{ThemeResource SystemControlForegroundAccentBrush}"
+                         Width="16"
+                         Height="16"
+                         HorizontalAlignment="Center" 
+                         VerticalAlignment="Center" />
+            </Grid>
+
+
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"
+                    VerticalAlignment="Bottom">
+            <Button x:Name="btnRegion"
+                    Background="Transparent"
+                    Height="72"
+                    Width="72">
+                <Button.Content>
+                    <Grid>
+                        <Ellipse Canvas.ZIndex="1"
+                                 Height="42"
+                                 Width="42"
+                                 Fill="White"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"/>
+                        <Ellipse Canvas.ZIndex="2"
+                                 Height="38"
+                                 Width="38"
+                                 Fill="Black"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center"/>
+                        <TextBlock Canvas.ZIndex="3"
+                                   Text="&#xE128;"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   FontSize="24"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Button.Content>
+                <Button.Flyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Text="Worldwide" Command="{Binding SelectRegionCommand}" CommandParameter="Europe" />
+                        <MenuFlyoutItem Text="Japan" Command="{Binding SelectRegionCommand}" CommandParameter="Japan" />
+                        <MenuFlyoutItem Text="United States" Command="{Binding SelectRegionCommand}" CommandParameter="UnitedStates" />
+                    </MenuFlyout>
+                </Button.Flyout>
+            </Button>
+        </StackPanel>
+        
+        
+        
+        
+        
+        <StackPanel Padding="24"
+                    Visibility="Collapsed">
 
             <Grid>
                 <ToggleSwitch IsOn="{Binding RadioOn, Mode=TwoWay}" IsEnabled="{Binding RadioSupported}" 
@@ -419,7 +521,7 @@
                 </Grid>
             </Border>
 
-            <Grid Margin="-24,0">
+            <!--<Grid Margin="-24,0">
                 <ScrollViewer HorizontalScrollMode="Enabled" VerticalScrollMode="Disabled" 
                               HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled" 
                               Height="100" Margin="0,6" 
@@ -429,8 +531,13 @@
                             Loaded="OnScrollerLoaded" />
                 </ScrollViewer>
                 <Rectangle Fill="{ThemeResource SystemControlForegroundAccentBrush}" Width="5" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
-            </Grid>
+            </Grid>-->
 
         </StackPanel>
+        
+        
+        
+        
+        
     </Grid>
 </Page>

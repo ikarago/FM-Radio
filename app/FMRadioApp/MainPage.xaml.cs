@@ -22,11 +22,11 @@ namespace FMRadioApp
 {
 	public sealed partial class MainPage : Page, INotifyPropertyChanged
 	{
-		private const int FrequencyScaling = 70;
-		private const int HalfFrequencyScaling = 35;
+		private const int FrequencyScaling = 100;
+		private const int HalfFrequencyScaling = 50;
 
-		private const int ThickMarkWidth = 3;
-		private const double ThickMarkLength = 0.5;
+		private const int ThickMarkWidth = 4;
+		private const double ThickMarkLength = 0.2;
 		private const int ThinMarkWidth = 1;
 		private const double ThinMarkLength = 0.25;
 
@@ -266,58 +266,58 @@ namespace FMRadioApp
 				// the text is only in the valid range
 				if (x >= 0 && x <= size)
 				{
-					var freq = new Border
-					{
-						BorderBrush = null,
-						Child = new TextBlock
-						{
-							Text = GetFrequency(x).ToString("0"),
-							VerticalAlignment = VerticalAlignment.Center,
-							HorizontalAlignment = HorizontalAlignment.Center
-						}
-					};
-					freq.SetValue(Canvas.TopProperty, 0);
-					freq.SetValue(Canvas.LeftProperty, x - (FrequencyScaling / 2));
-					freq.SetValue(Canvas.WidthProperty, FrequencyScaling);
-					freq.SetValue(Canvas.HeightProperty, scrollerCanvas.ActualHeight * ThickMarkLength);
-					scrollerCanvas.Children.Add(freq);
+					//var freq = new Border
+					//{
+					//	BorderBrush = null,
+					//	Child = new TextBlock
+					//	{
+					//		Text = GetFrequency(x).ToString("0"),
+					//		VerticalAlignment = VerticalAlignment.Center,
+					//		HorizontalAlignment = HorizontalAlignment.Center
+					//	}
+					//};
+					//freq.SetValue(Canvas.TopProperty, 0);
+					//freq.SetValue(Canvas.LeftProperty, x - (FrequencyScaling / 2));
+					//freq.SetValue(Canvas.WidthProperty, FrequencyScaling);
+					//freq.SetValue(Canvas.HeightProperty, scrollerCanvas.ActualHeight * ThickMarkLength);
+					//scrollerCanvas.Children.Add(freq);
 				}
 
 				// the main line
-				scrollerCanvas.Children.Add(new Line
-				{
-					X1 = x,
-					X2 = x,
-					Y1 = scrollerCanvas.ActualHeight * (1 - ThickMarkLength),
-					Y2 = scrollerCanvas.ActualHeight,
-					Stroke = scrollview.Foreground,
-					StrokeThickness = ThickMarkWidth
-				});
+				//scrollerCanvas.Children.Add(new Line
+				//{
+				//	X1 = x,
+				//	X2 = x,
+				//	Y1 = scrollerCanvas.ActualHeight * (1 - ThickMarkLength),
+				//	Y2 = scrollerCanvas.ActualHeight,
+				//	Stroke = scrollview.Foreground,
+				//	StrokeThickness = ThickMarkWidth
+				//});
 
 				// the half line
-				scrollerCanvas.Children.Add(new Line
-				{
-					X1 = x - HalfFrequencyScaling,
-					X2 = x - HalfFrequencyScaling,
-					Y1 = scrollerCanvas.ActualHeight * (1 - ThinMarkLength),
-					Y2 = scrollerCanvas.ActualHeight,
-					Stroke = scrollview.Foreground,
-					StrokeThickness = ThinMarkWidth
-				});
+				//scrollerCanvas.Children.Add(new Line
+				//{
+				//	X1 = x - HalfFrequencyScaling,
+				//	X2 = x - HalfFrequencyScaling,
+				//	Y1 = scrollerCanvas.ActualHeight * (1 - ThinMarkLength),
+				//	Y2 = scrollerCanvas.ActualHeight,
+				//	Stroke = scrollview.Foreground,
+				//	StrokeThickness = ThinMarkWidth
+				//});
 
 				x += FrequencyScaling;
 			}
 
 			// the last half line
-			scrollerCanvas.Children.Add(new Line
-			{
-				X1 = x - HalfFrequencyScaling,
-				X2 = x - HalfFrequencyScaling,
-				Y1 = scrollerCanvas.ActualHeight * (1 - ThinMarkLength),
-				Y2 = scrollerCanvas.ActualHeight,
-				Stroke = scrollview.Foreground,
-				StrokeThickness = ThinMarkWidth
-			});
+			//scrollerCanvas.Children.Add(new Line
+			//{
+			//	X1 = x - HalfFrequencyScaling,
+			//	X2 = x - HalfFrequencyScaling,
+			//	Y1 = scrollerCanvas.ActualHeight * (1 - ThinMarkLength),
+			//	Y2 = scrollerCanvas.ActualHeight,
+			//	Stroke = scrollview.Foreground,
+			//	StrokeThickness = ThinMarkWidth
+			//});
 		}
 
 		private void OnScrollviewLayout(object sender, object e)
