@@ -10,6 +10,162 @@
     <Page.Resources>
         <local:FrequencyFormatter x:Key="FrequencyFormatter" />
 
+        <Style x:Key="ToggleButtonRound" TargetType="ToggleButton">
+            <Setter Property="Background" Value="{ThemeResource ToggleButtonBackground}"/>
+            <Setter Property="Foreground" Value="{ThemeResource ToggleButtonForeground}"/>
+            <Setter Property="BorderBrush" Value="{ThemeResource ToggleButtonBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="{ThemeResource ToggleButtonBorderThemeThickness}"/>
+            <Setter Property="Padding" Value="8,4,8,4"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}"/>
+            <Setter Property="UseSystemFocusVisuals" Value="True"/>
+            <Setter Property="FocusVisualMargin" Value="-3"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid x:Name="RootGrid">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="PointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundChecked}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundChecked}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundCheckedPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundCheckedPointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedPressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundCheckedPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundCheckedPressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="CheckedDisabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundCheckedDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundCheckedDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundIndeterminate}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundIndeterminate}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="IndeterminatePointerOver">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundIndeterminatePointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundIndeterminatePointerOver}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="IndeterminatePressed">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundIndeterminatePressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundIndeterminatePressed}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="RootEllipse"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="IndeterminateDisabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="RootEllipse">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonBackgroundIndeterminateDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToggleButtonForegroundIndeterminateDisabled}"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Ellipse x:Name="RootEllipse"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Fill="{TemplateBinding Background}" />
+                            <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <Style x:Key="OnOffSwitchStyle123" TargetType="ToggleSwitch">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -379,13 +535,26 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <!-- TEMP PLACE -->
         <ToggleSwitch IsOn="{Binding RadioOn, Mode=TwoWay}"
+                      Visibility="Collapsed"
                       IsEnabled="{Binding RadioSupported}" 
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
                       Style="{StaticResource OnOffSwitchStyle}" />
-        
-        
-        
+        <ToggleButton x:Name="tbtnRadioOn"
+                      Background="Transparent"
+                      IsChecked="{Binding RadioOn, Mode=TwoWay}"
+                      Content="&#xE7E8;"
+                      FontFamily="Segoe MDL2 Assets"
+                      FontSize="36" 
+                      Height="60"
+                      Width="60"
+                      Margin="24"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Style="{StaticResource ToggleButtonRound}"/>
+
+
+
         <StackPanel VerticalAlignment="Center"
                     Canvas.ZIndex="10">
             <StackPanel Orientation="Horizontal"
@@ -398,8 +567,9 @@
                            Margin="0,0,0,0"/>
                 <TextBlock x:Name="tblMhz"
                            Text="MHz"
-                           Foreground="{ThemeResource SystemControlForegroundBaseMediumHighBrush}"
+                           Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                            Style="{ThemeResource SubheaderTextBlockStyle}"
+                           FontWeight="Normal"
                            Margin="0,24,0,0"/>
             </StackPanel>
 
@@ -419,32 +589,41 @@
                               x:Name="scrollview" 
                               ViewChanged="OnScrollerScrolled"
                               LayoutUpdated="OnScrollviewLayout">
-                    <Canvas x:Name="scrollerCanvas"
+                    <Grid>
+                        <Canvas x:Name="scrollerCanvas"
                             Canvas.ZIndex="1"
                             Width="240"
                             Height="4"
                             Background="{ThemeResource ApplicationForegroundThemeBrush}" 
                             Loaded="OnScrollerLoaded" />
+                        <Canvas x:Name="scrollerCanvas2"
+                                Canvas.ZIndex="2"
+                                Width="240"
+                                Height="60"
+                                Loaded="OnScrollerLoaded" />
+                    </Grid>
                 </ScrollViewer>
-                <Ellipse Fill="{ThemeResource SystemControlForegroundAccentBrush}"
+                <Ellipse Canvas.ZIndex="4"
+                         Fill="{ThemeResource SystemControlForegroundAccentBrush}"
                          Width="16"
                          Height="16"
                          HorizontalAlignment="Center" 
                          VerticalAlignment="Center" />
             </Grid>
+            
+            
 
 
         </StackPanel>
 
-        <StackPanel Orientation="Horizontal"
-                    VerticalAlignment="Bottom">
-            <Button x:Name="btnRegion"
-                    Background="Transparent"
-                    Height="72"
-                    Width="72">
-                <Button.Content>
+        <CommandBar VerticalAlignment="Bottom">
+            <AppBarButton x:Name="btnRegion"
+                          Background="Transparent"
+                          Icon="World"
+                          Label="Region">
+                <!--<AppBarButton.Content>
                     <Grid>
-                        <Ellipse Canvas.ZIndex="1"
+                        --><!--<Ellipse Canvas.ZIndex="1"
                                  Height="42"
                                  Width="42"
                                  Fill="White"
@@ -455,7 +634,7 @@
                                  Width="38"
                                  Fill="Black"
                                  HorizontalAlignment="Center"
-                                 VerticalAlignment="Center"/>
+                                 VerticalAlignment="Center"/>--><!--
                         <TextBlock Canvas.ZIndex="3"
                                    Text="&#xE128;"
                                    FontFamily="Segoe MDL2 Assets"
@@ -463,16 +642,26 @@
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"/>
                     </Grid>
-                </Button.Content>
-                <Button.Flyout>
+                </AppBarButton.Content>-->
+                <AppBarButton.Flyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Text="Worldwide" Command="{Binding SelectRegionCommand}" CommandParameter="Europe" />
                         <MenuFlyoutItem Text="Japan" Command="{Binding SelectRegionCommand}" CommandParameter="Japan" />
                         <MenuFlyoutItem Text="United States" Command="{Binding SelectRegionCommand}" CommandParameter="UnitedStates" />
                     </MenuFlyout>
-                </Button.Flyout>
-            </Button>
-        </StackPanel>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+
+            <!--<ToggleButton x:Name="btnPlay"
+                    Visibility="Collapsed"
+                    Background="Transparent"
+                    Content="&#xE102;"
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="24"
+                    Height="72"
+                    Width="72"
+                    Click="btnPlay_Click" />-->
+        </CommandBar>
         
         
         

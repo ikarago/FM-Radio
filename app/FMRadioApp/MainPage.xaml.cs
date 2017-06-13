@@ -215,7 +215,10 @@ namespace FMRadioApp
 			scrollerCanvas.Children.Clear();
 			scrollerCanvas.Width = size;
 
-			var back = ((SolidColorBrush)scrollerCanvas.Background).Color;
+            scrollerCanvas2.Children.Clear();
+            scrollerCanvas2.Width = size;
+
+            var back = ((SolidColorBrush)scrollerCanvas.Background).Color;
 
 			// the start gradient
 			var rect = new Rectangle
@@ -235,11 +238,11 @@ namespace FMRadioApp
 			rect.SetValue(Canvas.TopProperty, 0);
 			rect.SetValue(Canvas.LeftProperty, scrollerCanvas.Margin.Right * -2);
 			rect.SetValue(Canvas.WidthProperty, scrollerCanvas.Margin.Right * 2);
-			rect.SetValue(Canvas.HeightProperty, scrollerCanvas.ActualHeight);
+			rect.SetValue(Canvas.HeightProperty, 4);
 			scrollerCanvas.Children.Add(rect);
 
-			// the end gradient
-			rect = new Rectangle
+            // the end gradient
+            rect = new Rectangle
 			{
 				Fill = new LinearGradientBrush
 				{
@@ -256,7 +259,7 @@ namespace FMRadioApp
 			rect.SetValue(Canvas.TopProperty, 0);
 			rect.SetValue(Canvas.LeftProperty, size);
 			rect.SetValue(Canvas.WidthProperty, scrollerCanvas.Margin.Right * 2);
-			rect.SetValue(Canvas.HeightProperty, scrollerCanvas.ActualHeight);
+			rect.SetValue(Canvas.HeightProperty, 4);
 			scrollerCanvas.Children.Add(rect);
 
 			// start, and end, with a few lines
@@ -266,22 +269,23 @@ namespace FMRadioApp
 				// the text is only in the valid range
 				if (x >= 0 && x <= size)
 				{
-					//var freq = new Border
-					//{
-					//	BorderBrush = null,
-					//	Child = new TextBlock
-					//	{
-					//		Text = GetFrequency(x).ToString("0"),
-					//		VerticalAlignment = VerticalAlignment.Center,
-					//		HorizontalAlignment = HorizontalAlignment.Center
-					//	}
-					//};
-					//freq.SetValue(Canvas.TopProperty, 0);
-					//freq.SetValue(Canvas.LeftProperty, x - (FrequencyScaling / 2));
-					//freq.SetValue(Canvas.WidthProperty, FrequencyScaling);
-					//freq.SetValue(Canvas.HeightProperty, scrollerCanvas.ActualHeight * ThickMarkLength);
-					//scrollerCanvas.Children.Add(freq);
-				}
+                    var freq = new Border
+                    {
+                        BorderBrush = null,
+                        Child = new TextBlock
+                        {
+                            Text = GetFrequency(x).ToString("0"),
+                            Foreground = tblMhz.Foreground,
+                            VerticalAlignment = VerticalAlignment.Center,
+                            HorizontalAlignment = HorizontalAlignment.Center
+                        }
+                    };
+                    freq.SetValue(Canvas.TopProperty, 40);
+                    freq.SetValue(Canvas.LeftProperty, x - (FrequencyScaling / 2));
+                    freq.SetValue(Canvas.WidthProperty, FrequencyScaling);
+                    freq.SetValue(Canvas.HeightProperty, scrollerCanvas2.ActualHeight * ThickMarkLength);
+                    scrollerCanvas2.Children.Add(freq);
+                }
 
 				// the main line
 				//scrollerCanvas.Children.Add(new Line
@@ -324,12 +328,19 @@ namespace FMRadioApp
 		{
 			var margin = scrollview.ActualWidth / 2;
 			scrollerCanvas.Margin = new Thickness(margin, 0, margin, 0);
-		}
+            scrollerCanvas2.Margin = new Thickness(margin, 0, margin, 0);
 
-		private void OnScrollerLoaded(object sender, RoutedEventArgs e)
+        }
+
+        private void OnScrollerLoaded(object sender, RoutedEventArgs e)
 		{
 			RefreshScroller();
 			Frequency = Frequency;
 		}
-	}
+
+        private void btnPlay_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
 }
