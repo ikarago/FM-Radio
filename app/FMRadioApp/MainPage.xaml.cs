@@ -18,6 +18,8 @@ using Windows.UI;
 using Windows.Foundation;
 using System.Windows.Input;
 using Windows.UI.StartScreen;
+using Microsoft.Toolkit.Uwp.Notifications;
+using Windows.UI.Notifications;
 
 namespace FMRadioApp
 {
@@ -355,21 +357,100 @@ namespace FMRadioApp
                 SecondaryTile tile = new SecondaryTile(frequency);
                 bool success = await tile.RequestDeleteAsync();
                 
-                // TODO Change the graphic + text on the button
+                // TODO Change the graphic + text on the pin button
             }
             else
             {
                 // Tile image
                 Uri square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo.scale-200.png");
+                Uri wide310x150Logo = new Uri("ms-appx:///Assets/Wide310x150Logo.scale-200.png");
+
                 // Tile itself
                 SecondaryTile tile = new SecondaryTile(frequency, (frequency + "FM"), frequency, square150x150Logo, TileSize.Square150x150);
+                tile.VisualElements.Wide310x150Logo = wide310x150Logo;
+
                 // Extra stuff
-                tile.VisualElements.ShowNameOnSquare150x150Logo = true;
+                tile.VisualElements.ShowNameOnSquare150x150Logo = false;
+                tile.VisualElements.ShowNameOnWide310x150Logo = false;
 
                 // Now pin it!
                 bool success = await tile.RequestCreateAsync();
 
-                // TODO Change the graphic + text on the button
+
+                // Send an Notification to the tile with some more fitting info
+                var tileContent = new TileContent()
+                {
+                    Visual = new TileVisual()
+                    {
+                        TileSmall = new TileBinding()
+                        {
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                Children =
+                                {
+                                    new AdaptiveText()
+                                    {
+                                        Text = frequency,
+                                        HintStyle = AdaptiveTextStyle.Body
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = "FM"
+                                    }
+                                }
+                            }
+                        },
+                        TileMedium = new TileBinding()
+                        {
+                            Branding = TileBranding.None,
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                Children =
+                                {
+                                    new AdaptiveText()
+                                    {
+                                        Text = frequency,
+                                        HintStyle = AdaptiveTextStyle.Title
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = "FM",
+                                        HintStyle = AdaptiveTextStyle.Title
+                                    }
+                                }
+                            }
+                        },
+                        TileWide = new TileBinding()
+                        {
+                            Branding = TileBranding.None,
+                            Content = new TileBindingContentAdaptive()
+                            {
+                                Children =
+                                {
+                                    new AdaptiveText()
+                                    {
+                                        Text = frequency,
+                                        HintStyle = AdaptiveTextStyle.Title
+                                    },
+                                    new AdaptiveText()
+                                    {
+                                        Text = "FM",
+                                        HintStyle = AdaptiveTextStyle.Title
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                // Create the tile notification
+                var tileNotif = new TileNotification(tileContent.GetXml());
+
+                // And send the notification to the primary tile
+                //TileUpdateManager.CreateTileUpdaterForApplication().Update(tileNotif);
+                TileUpdateManager.CreateTileUpdaterForSecondaryTile(frequency).Update(tileNotif);
+
+                // TODO Change the graphic + text on the pin button
             }
         }
     }
