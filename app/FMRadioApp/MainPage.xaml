@@ -652,6 +652,11 @@
                 </AppBarButton.Flyout>
             </AppBarButton>
 
+            <AppBarButton x:Name="cbtnPinToStart"
+                          Label="Pin to Start"
+                          Icon="Pin"
+                          Click="cbtnPinToStart_Click" />
+
             <!--<ToggleButton x:Name="btnPlay"
                     Visibility="Collapsed"
                     Background="Transparent"

@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI;
 using Windows.Foundation;
 using System.Windows.Input;
+using Windows.UI.StartScreen;
 
 namespace FMRadioApp
 {
@@ -341,6 +342,36 @@ namespace FMRadioApp
         private void btnPlay_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private async void cbtnPinToStart_Click(object sender, RoutedEventArgs e)
+        {
+            string frequency = Frequency.ToString();
+
+            // Check whether to pin or unpin
+            if (SecondaryTile.Exists(frequency))
+            {
+                // Unpin the Tile
+                SecondaryTile tile = new SecondaryTile(frequency);
+                bool success = await tile.RequestDeleteAsync();
+                
+                // TODO Change the graphic + text on the button
+            }
+            else
+            {
+                // Tile image
+                Uri square150x150Logo = new Uri("ms-appx:///Assets/Square150x150Logo.scale-200.png");
+                // Tile itself
+                SecondaryTile tile = new SecondaryTile(frequency, (frequency + "FM"), frequency, square150x150Logo, TileSize.Square150x150);
+                // Extra stuff
+                tile.VisualElements.ShowNameOnSquare150x150Logo = true;
+
+
+                // Now pin it!
+                bool success = await tile.RequestCreateAsync();
+
+                // TODO Change the graphic + text on the button
+            }
         }
     }
 }
