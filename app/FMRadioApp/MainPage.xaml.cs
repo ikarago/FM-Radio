@@ -366,7 +366,6 @@ namespace FMRadioApp
                 // Extra stuff
                 tile.VisualElements.ShowNameOnSquare150x150Logo = true;
 
-
                 // Now pin it!
                 bool success = await tile.RequestCreateAsync();
 
