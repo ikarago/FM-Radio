@@ -578,7 +578,7 @@
                 <ScrollViewer HorizontalScrollMode="Enabled"
                               VerticalScrollMode="Disabled" 
                               HorizontalScrollBarVisibility="Hidden"
-                              VerticalScrollBarVisibility="Disabled" 
+                              VerticalScrollBarVisibility="Disabled"                               
                               Height="120"
                               Background="Transparent"
                               BorderBrush="{ThemeResource ApplicationForegroundThemeBrush}"

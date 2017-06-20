@@ -36,6 +36,8 @@ namespace FMRadioApp
 		private double frequency;
 		private bool isScrolling;
 
+        private bool isOpenedFromPin = false;
+
 		private Task radioUpdateTimer;
 
 		public MainPage()
@@ -62,7 +64,37 @@ namespace FMRadioApp
 			radioUpdateTimer = Task.Run(OnRefreshRadio);
 		}
 
-		private async Task OnRefreshRadio()
+        // TODO: Make this work with every Tile activation, instead of only the first time
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            Debug.WriteLine("MainPage - Navigation - Start navigation ");
+
+            // Try to catch the frequency from the activation arguments
+            try
+            {
+                string parameter = e.Parameter.ToString();
+                if (parameter != "")
+                {
+                    // Set it as the frequency...
+                    double bootFrequency = Convert.ToDouble(parameter);
+                    Frequency = bootFrequency;
+                    // The Scrolled-event will handle the change to the correct offset with the help of the little trigger below :)
+                    isOpenedFromPin = true;
+
+                    // TODO: Improve this?
+                    // Turn on the radio
+                    tbtnRadioOn.IsChecked = true;
+                }
+            }
+            catch { }
+            Debug.WriteLine("MainPage - Navigation - Navigation done!");
+        }
+
+
+
+        private async Task OnRefreshRadio()
 		{
 			while (true)
 			{
@@ -207,7 +239,22 @@ namespace FMRadioApp
 		private void OnScrollerScrolled(object sender, ScrollViewerViewChangedEventArgs e)
 		{
 			isScrolling = true;
-			Frequency = GetFrequency(scrollview.HorizontalOffset);
+
+            if (isOpenedFromPin == false)
+            {
+                // If not opened directly from a other source; just fire off the normal scroll-event
+                Frequency = GetFrequency(scrollview.HorizontalOffset);
+            }
+            else
+            {
+                // If fired from another place (like a secondary tile); get the offsets of everything and change the view of the scrollviewer
+                double horizontalOffset = GetOffset(Frequency);
+                double verticalOffset = scrollview.VerticalOffset;
+                float zoomFactor = scrollview.ZoomFactor; 
+                scrollview.ChangeView(horizontalOffset, verticalOffset, zoomFactor);
+                isOpenedFromPin = false;  // And turn of this little trigger, ofc.
+            }
+
 			isScrolling = false;
 		}
 
