@@ -533,6 +533,21 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0"
+                   Text="radio"
+                   Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
+                   Style="{ThemeResource HeaderTextBlockStyle}"
+                   FontSize="144"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   TextWrapping="NoWrap"
+                   Margin="-6,-84,0,0"/>
+
         <!-- TEMP PLACE -->
         <ToggleSwitch IsOn="{Binding RadioOn, Mode=TwoWay}"
                       Visibility="Collapsed"
@@ -540,42 +555,37 @@
                       HorizontalAlignment="Left"
                       VerticalAlignment="Top"
                       Style="{StaticResource OnOffSwitchStyle}" />
-        <ToggleButton x:Name="tbtnRadioOn"
-                      Background="Transparent"
-                      IsChecked="{Binding RadioOn, Mode=TwoWay}"
-                      Content="&#xE7E8;"
-                      FontFamily="Segoe MDL2 Assets"
-                      FontSize="36" 
-                      Height="60"
-                      Width="60"
-                      Margin="24"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      Style="{StaticResource ToggleButtonRound}"/>
-
-
-
-        <StackPanel VerticalAlignment="Center"
-                    Canvas.ZIndex="10">
-            <StackPanel Orientation="Horizontal"
+        <Grid Grid.Row="1"
+              Canvas.ZIndex="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <!-- Radio thingie -->
+            <StackPanel Grid.Row="0"
+                        Orientation="Vertical"
+                        VerticalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
                         Margin="24,0">
-                <TextBlock Text="{Binding Frequency, Mode=TwoWay, Converter={StaticResource FrequencyFormatter}, FallbackValue='Radio'}"
+                    <TextBlock Text="{Binding Frequency, Mode=TwoWay, Converter={StaticResource FrequencyFormatter}, FallbackValue='Radio'}"
                            Style="{ThemeResource HeaderTextBlockStyle}"                           
                            FontSize="96"
                            FontWeight="Normal"
                            Margin="0,0,0,0"/>
-                <TextBlock x:Name="tblMhz"
+                    <TextBlock x:Name="tblMhz"
                            Text="MHz"
                            Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                            Style="{ThemeResource SubheaderTextBlockStyle}"
                            FontWeight="Normal"
                            Margin="0,24,0,0"/>
-            </StackPanel>
+                </StackPanel>
 
-            <Grid Margin="0,-48,0,0"
+                <Grid Margin="0,-48,0,0"
                   Canvas.ZIndex="5">
-                <ScrollViewer HorizontalScrollMode="Enabled"
+                    <ScrollViewer HorizontalScrollMode="Enabled"
                               VerticalScrollMode="Disabled" 
                               HorizontalScrollBarVisibility="Hidden"
                               VerticalScrollBarVisibility="Disabled"                               
@@ -589,34 +599,106 @@
                               x:Name="scrollview" 
                               ViewChanged="OnScrollerScrolled"
                               LayoutUpdated="OnScrollviewLayout">
-                    <Grid>
-                        <Canvas x:Name="scrollerCanvas"
+                        <Grid>
+                            <Canvas x:Name="scrollerCanvas"
                             Canvas.ZIndex="1"
                             Width="240"
                             Height="4"
                             Background="{ThemeResource ApplicationForegroundThemeBrush}" 
                             Loaded="OnScrollerLoaded" />
-                        <Canvas x:Name="scrollerCanvas2"
+                            <Canvas x:Name="scrollerCanvas2"
                                 Canvas.ZIndex="2"
                                 Width="240"
                                 Height="60"
                                 Loaded="OnScrollerLoaded" />
-                    </Grid>
-                </ScrollViewer>
-                <Ellipse Canvas.ZIndex="4"
+                        </Grid>
+                    </ScrollViewer>
+                    <Ellipse Canvas.ZIndex="4"
                          Fill="{ThemeResource SystemControlForegroundAccentBrush}"
                          Width="16"
                          Height="16"
                          HorizontalAlignment="Center" 
                          VerticalAlignment="Center" />
+                </Grid>
+            </StackPanel>
+            <!-- END OF radio thingie -->
+
+            <Grid Grid.Row="1"
+                  HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Previous -->
+                <Button x:Name="btnPrevious"
+                        Grid.Column="0"
+                        Visibility="Collapsed"
+                        Background="Transparent"
+                        Content="&#xE100;"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="36"
+                        Height="60"
+                        Width="60"/>
+                
+                <!-- Play-button -->
+                <Button x:Name="btnPlay"
+                        Grid.Column="1"
+                        Visibility="Collapsed"
+                        Background="Transparent"
+                        Content="&#xE102;"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="36"
+                        Height="60"
+                        Width="60"/>
+                <!-- Pause-button -->
+                <Button x:Name="btnPause"
+                        Grid.Column="1"
+                        Visibility="Collapsed"
+                        Background="Transparent"
+                        Content="&#xE103;"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="36"
+                        Height="60"
+                        Width="60"/>
+
+
+                <!-- Next -->
+                <Button x:Name="btnNext"
+                        Grid.Column="2"
+                        Visibility="Collapsed"
+                        Background="Transparent"
+                        Content="&#xE101;"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="36"
+                        Height="60"
+                        Width="60"/>
+
+
+                <ToggleButton x:Name="tbtnRadioOn"
+                              Grid.Column="3"
+                      Visibility="Visible"
+                      Background="Transparent"
+                      IsChecked="{Binding RadioOn, Mode=TwoWay}"
+                      Content="&#xE7E8;"
+                      FontFamily="Segoe MDL2 Assets"
+                      FontSize="36" 
+                          Margin="24"
+                      Height="60"
+                      Width="60"
+                      Style="{StaticResource ToggleButtonRound}"/>
             </Grid>
             
-            
 
 
-        </StackPanel>
 
-        <CommandBar VerticalAlignment="Bottom">
+
+
+        </Grid>
+
+        <CommandBar Grid.Row="2">
             <AppBarButton x:Name="btnRegion"
                           Background="Transparent"
                           Icon="World"
