@@ -500,5 +500,24 @@ namespace FMRadioApp
                 // TODO Change the graphic + text on the pin button
             }
         }
+
+        private void btnNext_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Improve this abomination
+            while (Frequency >= MinFrequency && Frequency <= MaxFrequency && (SignalStrength * 2) < 2)
+            {
+                Frequency += 0.1;
+            }
+        }
+
+        private void btnPrevious_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: Improve this abomination
+
+            while (Frequency >= MinFrequency && Frequency <= MaxFrequency && (SignalStrength * 2) < 2)
+            {
+                Frequency -= 0.1;
+            }
+        }
     }
 }
