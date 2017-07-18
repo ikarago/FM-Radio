@@ -360,6 +360,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0"
+                   Visibility="Collapsed"
                    Text="radio"
                    Foreground="{ThemeResource SystemControlForegroundBaseMediumBrush}"
                    Style="{ThemeResource HeaderTextBlockStyle}"
@@ -444,8 +445,11 @@
             </StackPanel>
             <!-- END OF radio thingie -->
 
-            <Grid Grid.Row="1"
-                  HorizontalAlignment="Center">
+            <!-- Sneaky adjustment; put back on row 1 for normal stuff -->
+            <Grid Grid.Row="0"
+                  Margin="0,0,0,24"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Bottom">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -456,13 +460,14 @@
                 <!-- Previous -->
                 <Button x:Name="btnPrevious"
                         Grid.Column="0"
-                        Visibility="Visible"
+                        Visibility="Collapsed"
                         Background="Transparent"
                         Content="&#xE100;"
                         FontFamily="Segoe MDL2 Assets"
                         FontSize="36"
                         Height="60"
-                        Width="60" Click="btnPrevious_Click"/>
+                        Width="60" 
+                        Click="btnPrevious_Click"/>
 
                 <!-- Play-button -->
                 <Button x:Name="btnPlay"
@@ -489,7 +494,7 @@
                 <!-- Next -->
                 <Button x:Name="btnNext"
                         Grid.Column="2"
-                        Visibility="Visible"
+                        Visibility="Collapsed"
                         Background="Transparent"
                         Content="&#xE101;"
                         FontFamily="Segoe MDL2 Assets"
@@ -500,14 +505,13 @@
 
 
                 <ToggleButton x:Name="tbtnRadioOn"
-                              Grid.Column="3"
+                              Grid.Column="1"
                       Visibility="Visible"
                       Background="Transparent"
                       IsChecked="{Binding RadioOn, Mode=TwoWay}"
                       Content="&#xE7E8;"
                       FontFamily="Segoe MDL2 Assets"
-                      FontSize="36" 
-                          Margin="24"
+                      FontSize="36"
                       Height="60"
                       Width="60"
                       Style="{StaticResource ToggleButtonRound}"/>

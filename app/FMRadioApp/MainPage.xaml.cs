@@ -504,7 +504,7 @@ namespace FMRadioApp
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             //TODO: Improve this abomination
-            while (Frequency >= MinFrequency && Frequency <= MaxFrequency && (SignalStrength * 2) < 2)
+            while (Frequency >= MinFrequency && Frequency <= MaxFrequency && (SignalStrength * 2) < 3)
             {
                 Frequency += 0.1;
             }
